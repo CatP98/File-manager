@@ -1,6 +1,9 @@
 package com.catmap.files;
 
+import javax.imageio.IIOException;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class FileManager {
 
@@ -21,8 +24,9 @@ public class FileManager {
             } else {
                 System.out.println("Directory is empty");
             }
+        } else {
+        System.out.println("Invalid directory path : Path either doesn't exit or is not a directory.");
         }
-        System.out.println("Invalid directory path : Path either does'nt exit or is not a directory.");
     }
 
     public void createDirectory(String directoryPath){
@@ -37,16 +41,29 @@ public class FileManager {
 
     public void deleteFileDirectory(String directoryOrFilePath){
         File file = new File(directoryOrFilePath);
+
         if(file.delete()) {
             System.out.println("Successfully Deleted the file!");
         } else {
-            System.out.println("Failed to delete File.");
+            System.out.println("Failed to delete File. That directory/file does not exist. ");
         };
     }
 
-    public String createFile(String text){
-        return text;
-    }
+    public boolean createFile(String filePath) {
+        File file = new File(filePath);
 
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File created successfully: " + filePath);
+                return true;
+            } else {
+                System.out.println("File already exists: " + filePath);
+                return false;
+            }
+        } catch (IOException e){
+            System.out.println("An error occurred while creating the file: " + e.getMessage());
+            return false;
+        }
+    }
 }
 
