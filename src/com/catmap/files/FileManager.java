@@ -26,11 +26,22 @@ public class FileManager {
     }
 
     public void createDirectory(String directoryPath){
-        System.out.println("createDirectory(_) Not implemented yet");
+        File directory = new File(directoryPath);
+
+        if(directory.mkdir()) {
+            System.out.println("Successfully created Directory.");
+        } else {
+            System.out.println("Faliked to create Directory");
+        }
     }
 
-    public void deleteFileDirectory(String directoryPath){
-        System.out.println("deleteFileDirectory(_) Not implemented yet");
+    public void deleteFileDirectory(String directoryOrFilePath){
+        File file = new File(directoryOrFilePath);
+        if(file.delete()) {
+            System.out.println("Successfully Deleted the file!");
+        } else {
+            System.out.println("Failed to delete File.");
+        };
     }
 
     public String createFile(String text){
