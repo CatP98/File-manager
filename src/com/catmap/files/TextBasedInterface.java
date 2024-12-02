@@ -6,20 +6,13 @@ public class TextBasedInterface implements UserInterface, UIEventHandler{
     private UIEventHandler handler = null;
 
 
-
     @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
 
-
         while(run){
-            System.out.println("File Manager Menu: ");
-            System.out.println("1. List Files");
-            System.out.println("2. Create Drectory ");
-            System.out.println("3. Delete a File or Directory");
-            System.out.println("4. Exit program");
-            System.out.println("Please enter your choice: ");
+            displayMenu();
 
             int userChoice = -1;
 
@@ -44,7 +37,6 @@ public class TextBasedInterface implements UserInterface, UIEventHandler{
                 case 3:
                     System.out.println("Enter directory path to delete: ");
                     handler.onDelete(scanner.nextLine());
-
                     break;
                 case 4:
                     System.out.println("Exiting... ");
@@ -53,15 +45,28 @@ public class TextBasedInterface implements UserInterface, UIEventHandler{
                 default:
                     System.out.println("Invalid choice");
             }
-//
-//            System.out.println("Would you like to continue? (Y/N)");
-//            //scanner.nextLine();
-//            String choice = scanner.nextLine().toLowerCase();
-//            if(choice == "n"){
-//                run = false;
-//            }
+
+            System.out.println("Would you like to continue? (Y/N)");
+            //scanner.nextLine();
+            String choice = scanner.nextLine().toLowerCase();
+            if(!choice.equals("y")){
+                System.out.println("Goodbye!");
+                //return;
+                run = false;
+            }
         }
+        scanner.close();
     }
+
+    private void displayMenu() {
+        System.out.println("File Manager Menu:");
+        System.out.println("1. List Files");
+        System.out.println("2. Create Directory");
+        System.out.println("3. Delete a File or Directory");
+        System.out.println("4. Exit program");
+        System.out.println("Please enter your choice:");
+    }
+
 
     @Override
     public void subscribe(UIEventHandler handler) {

@@ -10,7 +10,6 @@ public class App implements UIEventHandler {
 
         ui.start();
 
-
     }
 
     public App(){
